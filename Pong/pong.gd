@@ -26,9 +26,9 @@ func _process(delta):
 	Called every frame. 'delta' is the elapsed time 
 	since the previous frame.
 	"""
-	var ball_pos = get_node("ball").get_pos()
-	var left_rect = Rect2(get_node("left").get_pos() - pad_size * 0.5, pad_size)
-	var right_rect = Rect2(get_node("right").get_pos() - pad_size * 0.5, pad_size)
+	var ball_pos = get_node("ball").position
+	var left_rect = Rect2(get_node("left").position - pad_size * 0.5, pad_size)
+	var right_rect = Rect2(get_node("right").position - pad_size * 0.5, pad_size)
 	
 	# Integrate new ball possition
 	ball_pos += direction * ball_speed * delta
@@ -51,27 +51,30 @@ func _process(delta):
 		direction = Vector2(-1, 0)
 	
 	# Update Node
-	get_node("ball").set_pos(ball_pos)
+	# get_node("ball").set_pos(ball_pos)
+	get_node("ball").position = ball_pos
 	
 	# Move left pad
-	var left_pos = get_node("left").get_pos()
+	var left_pos = get_node("left").position
 	
 	if (left_pos.y > 0 and Input.is_action_pressed("left_move_up")):
 		left_pos.y -= PAD_SPEED * delta
 	if (left_pos.y < screen_size.y and Input.is_action_pressed("left_move_down")):
 		left_pos.y += PAD_SPEED * delta
 	
-	get_node("left").set_pos(left_pos)
+	# get_node("left").set_pos(left_pos)
+	get_node("left").position = left_pos
 	
 	# Move right pad
-	var right_pos = get_node("right").get_pos()
+	var right_pos = get_node("right").position # get_pos()
 	
 	if (right_pos.y > 0 and Input.is_action_pressed("right_move_up")):
 		right_pos.y -= PAD_SPEED * delta
 	if (right_pos.y < screen_size.y and Input.is_action_pressed("right_move_down")):
 		right_pos.y += PAD_SPEED * delta
 	
-	get_node("right").set_pos(right_pos)
+	# get_node("right").set_pos(right_pos)
+	get_node("right").position = right_pos
 	
 	
 	
